@@ -288,3 +288,142 @@ function smoothScrollTo(targetId) {
         });
     }
 }
+/**
+ * Initialize interactive features on page load
+ * Demonstrates event listeners and DOM manipulation
+ */
+function initializeInteractions() {
+    // Explore button smooth scroll
+    const exploreBtn = document.getElementById('exploreBtn');
+    if (exploreBtn) {
+        exploreBtn.addEventListener('click', () => {
+            smoothScrollTo('part1');
+        });
+    }
+    
+    // Click handler for animated box
+    const animatedBox = document.getElementById('animatedBox');
+    if (animatedBox) {
+        animatedBox.addEventListener('click', () => {
+            // Randomly choose between bounce and shake animations
+            const animations = ['bounce', 'shake'];
+            const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+            triggerAnimation('animatedBox', randomAnimation);
+        });
+    }
+    
+    // Click handler for flip card
+    const flipCard = document.getElementById('flipCard');
+    if (flipCard) {
+        flipCard.addEventListener('click', () => {
+            flipCard.classList.toggle('flipped');
+        });
+    }
+    
+    // Close modal when clicking outside content
+    const modal = document.getElementById('modal');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+    
+    // Initialize color box with default color
+    changeColorWithAnimation();
+}
+
+/**
+ * Advanced function demonstrating array manipulation with parameters
+ * @param {Array} numbers - Array of numbers to process
+ * @returns {Object} - Object containing statistics
+ */
+function calculateStatistics(numbers) {
+    // LOCAL SCOPE - these variables only exist here
+    if (!numbers || numbers.length === 0) {
+        return { error: 'No numbers provided' };
+    }
+    
+    const sum = numbers.reduce((acc, num) => acc + num, 0);
+    const average = sum / numbers.length;
+    const max = Math.max(...numbers);
+    const min = Math.min(...numbers);
+    
+    // RETURN an object with multiple values
+    return {
+        sum: sum,
+        average: average.toFixed(2),
+        max: max,
+        min: min,
+        count: numbers.length
+    };
+}
+
+/**
+ * Function demonstrating closure and encapsulation
+ * Returns a function that maintains private state
+ * @param {number} initial - Initial counter value
+ * @returns {Function} - Counter function with private state
+ */
+function createCounter(initial = 0) {
+    // PRIVATE variable - only accessible within returned function
+    let count = initial;
+    
+    // Return a function that has access to 'count' (closure)
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+/**
+ * Debounce function - practical example of higher-order functions
+ * @param {Function} func - Function to debounce
+ * @param {number} delay - Delay in milliseconds
+ * @returns {Function} - Debounced function
+ */
+function debounce(func, delay) {
+    let timeoutId;
+    
+    return function(...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+}
+
+/**
+ * Animation queue system - demonstrates advanced function composition
+ * @param {string} elementId - Element to animate
+ * @param {Array} animationSequence - Array of animation class names
+ * @param {number} delay - Delay between animations in ms
+ */
+function animateSequence(elementId, animationSequence, delay = 700) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    let currentIndex = 0;
+    
+    function playNextAnimation() {
+        if (currentIndex >= animationSequence.length) return;
+        
+        const animClass = animationSequence[currentIndex];
+        
+        // Remove all animation classes
+        element.classList.remove('bounce', 'shake', 'pulse');
+        
+        // Add current animation
+        element.classList.add(animClass);
+        
+        // Schedule next animation
+        currentIndex++;
+        setTimeout(() => {
+            element.classList.remove(animClass);
+            playNextAnimation();
+        }, delay);
+    }
+    
+    playNextAnimation();
+}

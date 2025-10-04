@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CSS & JavaScript Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section with CSS Animations -->
+    <header class="hero">
+        <div class="hero-content fade-in">
+            <h1 class="glowing-text">CSS & JavaScript Mastery</h1>
+            <p class="subtitle slide-up">Where Animation Meets Interaction</p>
+            <button class="cta-button" id="exploreBtn">Explore Features</button>
+        </div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </header>
+
+    <!-- Part 1: CSS Transitions and Animations -->
+    <section class="section" id="part1">
+        <div class="container">
+            <h2 class="section-title">Part 1: CSS3 Animations</h2>
+            <p class="section-description">Pure CSS transitions and keyframe animations creating visual magic</p>
+            
+            <div class="demo-grid">
+                <!-- Hover Effect Cards -->
+                <div class="demo-card hover-lift">
+                    <div class="card-icon">🎨</div>
+                    <h3>Hover Effects</h3>
+                    <p>Smooth transitions on hover create depth and interactivity</p>
+                </div>
+
+                <div class="demo-card hover-glow">
+                    <div class="card-icon">✨</div>
+                    <h3>Glow Animation</h3>
+                    <p>Continuous pulsing effect using keyframes</p>
+                </div>
+
+                <div class="demo-card hover-rotate">
+                    <div class="card-icon">🔄</div>
+                    <h3>Rotate Transform</h3>
+                    <p>3D rotation transforms on hover</p>
+                </div>
+            </div>
+
+            <!-- Loading Spinner (continuous animation) -->
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <p>Continuous CSS Animation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 2: JavaScript Functions Demo -->
+    <section class="section" id="part2">
+        <div class="container">
+            <h2 class="section-title">Part 2: JavaScript Functions</h2>
+            <p class="section-description">Demonstrating scope, parameters, and return values</p>
+            
+            <div class="function-demos">
+                <!-- Calculator Demo -->
+                <div class="demo-box">
+                    <h3>Function Parameters & Return Values</h3>
+                    <div class="calculator">
+                        <input type="number" id="num1" placeholder="Number 1" value="10">
+                        <input type="number" id="num2" placeholder="Number 2" value="5">
+                        <button class="action-btn" onclick="demonstrateCalculations()">Calculate</button>
+                        <div id="calcResult" class="result-display"></div>
+                    </div>
+                </div>
+
+                <!-- Scope Demo -->
+                <div class="demo-box">
+                    <h3>Variable Scope Demonstration</h3>
+                    <button class="action-btn" onclick="demonstrateScope()">Test Scope</button>
+                    <div id="scopeResult" class="result-display"></div>
+                </div>
+
+                <!-- String Manipulation -->
+                <div class="demo-box">
+                    <h3>Reusable String Functions</h3>
+                    <input type="text" id="userText" placeholder="Enter text here" value="Hello World">
+                    <button class="action-btn" onclick="manipulateString()">Transform Text</button>
+                    <div id="stringResult" class="result-display"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 3: CSS + JavaScript Integration -->
+    <section class="section" id="part3">
+        <div class="container">
+            <h2 class="section-title">Part 3: CSS Animations + JavaScript</h2>
+            <p class="section-description">Dynamic animation control with JavaScript</p>
+            
+            <div class="interactive-grid">
+                <!-- Animated Box -->
+                <div class="interactive-demo">
+                    <h3>Click to Animate</h3>
+                    <div class="animated-box" id="animatedBox">
+                        <span>Click Me!</span>
+                    </div>
+                    <button class="action-btn" onclick="triggerAnimation('animatedBox')">Trigger Animation</button>
+                </div>
+
+                <!-- Card Flip -->
+                <div class="interactive-demo">
+                    <h3>Card Flip Effect</h3>
+                    <div class="flip-card" id="flipCard">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p>Front Side</p>
+                                <span>Click to flip</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <p>Back Side</p>
+                                <span>JavaScript + CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="action-btn" onclick="flipCard()">Flip Card</button>
+                </div>
+
+                <!-- Modal Trigger -->
+                <div class="interactive-demo">
+                    <h3>Dynamic Modal</h3>
+                    <button class="action-btn" onclick="openModal()">Open Modal</button>
+                    <p class="small-text">Combines fadeIn and slideUp animations</p>
+                </div>
+
+                <!-- Color Changer -->
+                <div class="interactive-demo">
+                    <h3>Dynamic Color Generator</h3>
+                    <div class="color-box" id="colorBox"></div>
+                    <button class="action-btn" onclick="changeColorWithAnimation()">Generate Color</button>
+                    <p id="colorValue" class="small-text"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal (Part 3) -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>JavaScript-Triggered Modal</h2>
+            <p>This modal demonstrates:</p>
+            <ul>
+                <li>JavaScript event handling</li>
+                <li>CSS fade-in animation</li>
+                <li>CSS slide-up animation</li>
+                <li>Function-based control</li>
+            </ul>
+            <button class="action-btn" onclick="closeModal()">Close Modal</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Created with CSS3 Animations & JavaScript Functions</p>
+        <p class="small-text">Demonstrating scope, parameters, return values, and dynamic styling</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

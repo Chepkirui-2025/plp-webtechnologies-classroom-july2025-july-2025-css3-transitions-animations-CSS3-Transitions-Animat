@@ -161,3 +161,130 @@ function manipulateString() {
         <strong>Character Count:</strong> ${charCount}
     `;
 }
+/* ========================================
+   PART 3: COMBINING CSS & JAVASCRIPT
+   JavaScript Controls CSS Animations
+   ======================================== */
+
+/**
+ * Reusable function to trigger animations by adding/removing CSS classes
+ * @param {string} elementId - ID of the element to animate
+ * @param {string} animationClass - CSS animation class to apply (default: 'bounce')
+ */
+function triggerAnimation(elementId, animationClass = 'bounce') {
+    const element = document.getElementById(elementId);
+    
+    if (!element) return;
+    
+    // Remove existing animation class if present
+    element.classList.remove('bounce', 'shake', 'pulse');
+    
+    // Trigger reflow to restart animation
+    void element.offsetWidth;
+    
+    // Add animation class
+    element.classList.add(animationClass);
+    
+    // Remove class after animation completes (clean up)
+    setTimeout(() => {
+        element.classList.remove(animationClass);
+    }, 600);
+}
+
+/**
+ * Function to toggle card flip using CSS classes
+ * Demonstrates state management with JavaScript
+ */
+function flipCard() {
+    const card = document.getElementById('flipCard');
+    
+    // Toggle the 'flipped' class which triggers CSS transition
+    card.classList.toggle('flipped');
+}
+
+/**
+ * Function to open modal with fade-in animation
+ * Shows how JavaScript can control CSS animation timing
+ */
+function openModal() {
+    const modal = document.getElementById('modal');
+    
+    // Add 'active' class which triggers CSS animations
+    modal.classList.add('active');
+    
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Function to close modal with fade-out effect
+ * Demonstrates cleanup and state management
+ */
+function closeModal() {
+    const modal = document.getElementById('modal');
+    
+    // Remove 'active' class to trigger fade-out
+    modal.classList.remove('active');
+    
+    // Re-enable body scroll
+    document.body.style.overflow = 'auto';
+}
+
+/**
+ * Function to generate random colors with parameters
+ * @returns {string} - Random hex color code
+ */
+function generateRandomColor() {
+    // LOCAL SCOPE variables
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    
+    // Generate 6-digit hex color
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    
+    return color; // RETURN the generated color
+}
+
+/**
+ * Function that combines color generation with CSS animation
+ * Demonstrates integration of JavaScript logic with CSS transitions
+ */
+function changeColorWithAnimation() {
+    const colorBox = document.getElementById('colorBox');
+    const colorValue = document.getElementById('colorValue');
+    
+    // Generate new random color using function
+    const newColor = generateRandomColor();
+    
+    // Add pulse animation class
+    colorBox.classList.add('pulse');
+    
+    // Change background color (CSS transition handles smooth change)
+    colorBox.style.backgroundColor = newColor;
+    
+    // Display color value
+    colorValue.textContent = `Current Color: ${newColor}`;
+    colorValue.style.color = newColor;
+    
+    // Remove animation class after completion
+    setTimeout(() => {
+        colorBox.classList.remove('pulse');
+    }, 500);
+}
+
+/**
+ * Utility function to add smooth scroll behavior
+ * @param {string} targetId - ID of element to scroll to
+ */
+function smoothScrollTo(targetId) {
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}

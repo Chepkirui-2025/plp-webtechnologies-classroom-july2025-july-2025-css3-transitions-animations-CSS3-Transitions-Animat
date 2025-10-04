@@ -102,3 +102,62 @@ function demonstrateScope() {
         <em>Note: Local variables are destroyed when function ends</em>
     `;
 }
+
+/**
+ * Reusable string manipulation function with parameters
+ * @param {string} text - Input text to manipulate
+ * @param {string} operation - Type of transformation
+ * @returns {string} - Transformed text
+ */
+function transformString(text, operation) {
+    // LOCAL SCOPE variables
+    let result;
+    
+    switch(operation) {
+        case 'uppercase':
+            result = text.toUpperCase();
+            break;
+        case 'lowercase':
+            result = text.toLowerCase();
+            break;
+        case 'reverse':
+            result = text.split('').reverse().join('');
+            break;
+        case 'wordCount':
+            result = text.trim().split(/\s+/).length;
+            break;
+        case 'charCount':
+            result = text.length;
+            break;
+        default:
+            result = text;
+    }
+    
+    return result; // RETURN the transformed value
+}
+
+/**
+ * Function that uses other functions (demonstrating modularity)
+ */
+function manipulateString() {
+    const inputText = document.getElementById('userText').value;
+    
+    // Call transformString with different parameters
+    const uppercase = transformString(inputText, 'uppercase');
+    const lowercase = transformString(inputText, 'lowercase');
+    const reversed = transformString(inputText, 'reverse');
+    const wordCount = transformString(inputText, 'wordCount');
+    const charCount = transformString(inputText, 'charCount');
+    
+    // Display all transformations
+    const resultDiv = document.getElementById('stringResult');
+    resultDiv.innerHTML = `
+        <strong>String Transformation Results:</strong><br>
+        <strong>Original:</strong> ${inputText}<br>
+        <strong>Uppercase:</strong> ${uppercase}<br>
+        <strong>Lowercase:</strong> ${lowercase}<br>
+        <strong>Reversed:</strong> ${reversed}<br>
+        <strong>Word Count:</strong> ${wordCount}<br>
+        <strong>Character Count:</strong> ${charCount}
+    `;
+}

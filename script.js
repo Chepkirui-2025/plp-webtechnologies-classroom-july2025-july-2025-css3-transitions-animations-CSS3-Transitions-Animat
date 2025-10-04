@@ -427,3 +427,103 @@ function animateSequence(elementId, animationSequence, delay = 700) {
     
     playNextAnimation();
 }
+
+/* ========================================
+   EVENT LISTENERS AND INITIALIZATION
+   ======================================== */
+
+// Wait for DOM to be fully loaded before initializing
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🎨 CSS & JavaScript Portfolio Initialized');
+    console.log(`Application: ${globalAppName}`);
+    
+    // Initialize all interactive features
+    initializeInteractions();
+    
+    // Example: Create a counter using closure
+    const pageCounter = createCounter(0);
+    console.log('Page interactions:', pageCounter());
+    
+    // Add keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Press 'Escape' to close modal
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+});
+
+/* ========================================
+   ADDITIONAL DEMONSTRATION FUNCTIONS
+   ======================================== */
+
+/**
+ * Function to validate form inputs with parameters
+ * @param {string} input - Input value to validate
+ * @param {string} type - Type of validation (email, number, text)
+ * @returns {Object} - Validation result with boolean and message
+ */
+function validateInput(input, type) {
+    let isValid = false;
+    let message = '';
+    
+    switch(type) {
+        case 'email':
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            isValid = emailRegex.test(input);
+            message = isValid ? 'Valid email' : 'Invalid email format';
+            break;
+        case 'number':
+            isValid = !isNaN(input) && input.trim() !== '';
+            message = isValid ? 'Valid number' : 'Please enter a valid number';
+            break;
+        case 'text':
+            isValid = input.trim().length > 0;
+            message = isValid ? 'Valid text' : 'Text cannot be empty';
+            break;
+        default:
+            message = 'Unknown validation type';
+    }
+    
+    // RETURN an object with validation results
+    return { isValid, message };
+}
+
+/**
+ * Function demonstrating array methods with callbacks
+ * @param {Array} items - Array of items to process
+ * @param {Function} callback - Function to apply to each item
+ * @returns {Array} - Processed array
+ */
+function processArray(items, callback) {
+    return items.map(callback);
+}
+
+/**
+ * Practical example: Format currency with parameters
+ * @param {number} amount - Amount to format
+ * @param {string} currency - Currency code (default: USD)
+ * @returns {string} - Formatted currency string
+ */
+function formatCurrency(amount, currency = 'USD') {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currency
+    }).format(amount);
+}
+
+// Export functions for potential module usage
+// This demonstrates how functions can be organized and reused
+const Utils = {
+    calculate,
+    transformString,
+    generateRandomColor,
+    validateInput,
+    formatCurrency,
+    calculateStatistics,
+    debounce,
+    createCounter
+};
+
+// Make utilities available globally for console testing
+window.PortfolioUtils = Utils;
